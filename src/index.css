@@ -8,3 +8,6 @@
 .font-inter {
     font-family: 'Inter', serif;
 }
+header a.active {
+    color: #4A00FF;
+}
