@@ -8,7 +8,7 @@ const Main = () => {
             <div className='min-h-screen flex flex-col justify-between'>
                 <Header/>
 
-                <main className='w-11/12 lg:w-10/12 max-w-[1275px] mx-auto flex-grow'>
+                <main className='flex-grow'>
                     <Outlet/>
                 </main>
 
