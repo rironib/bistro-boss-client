@@ -8,6 +8,7 @@ import Register from "../pages/Register/Register.jsx";
 import Contact from "../pages/Contact/Contact.jsx";
 import Menu from "../pages/Menu/Menu.jsx";
 import Shop from "../pages/Shop/Shop.jsx";
+import Dashboard from "../pages/Dashboard/Dashboard.jsx";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
                     {
                         path: '/shop',
                         element: <Shop/>
+                    },
+                    {
+                        path: '/dashboard',
+                        element: <Dashboard/>
                     }
                 ]
             },
