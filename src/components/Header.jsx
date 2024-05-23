@@ -9,7 +9,7 @@ const Header = () => {
         <NavLink to='/shop'>Our Shop</NavLink>
     </>
     return (
-        <header className='bg-transparent border-b'>
+        <header className='w-full bg-slate-900 bg-opacity-50 text-white fixed z-20'>
             <div className="w-11/12 lg:w-10/12 max-w-[1275px] mx-auto py-2">
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-3'>
@@ -27,11 +27,11 @@ const Header = () => {
                             </ul>
                         </div>
                         <div className="font-cinzel">
-                            <Link to='/' className='font-bold text-xl lg:text-3xl text-black'>BISTRO BOSS</Link>
+                            <Link to='/' className='font-bold text-xl lg:text-3xl'>BISTRO BOSS</Link>
                         </div>
                     </div>
 
-                    <div className='hidden lg:flex gap-2 font-semibold font-inter uppercase'>
+                    <div className='hidden lg:flex gap-4 font-semibold font-inter uppercase'>
                         {navMenu}
                     </div>
                     <div className="flex items-center gap-4">

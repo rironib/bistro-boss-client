@@ -9,5 +9,15 @@
     font-family: 'Inter', serif;
 }
 header a.active {
-    color: #4A00FF;
+    color: #EEFF25;
+}
+
+/*SwipperJS*/
+.swiper-pagination {
+    position: static !important;
+    margin-top: 8px
+}
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
 }

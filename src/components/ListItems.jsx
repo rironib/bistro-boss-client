@@ -1,15 +1,10 @@
-import SectionTitle from "../../components/SectionTitle.jsx";
 import {Link} from "react-router-dom";
-import useMenu from "../../hooks/useMenu.jsx";
-import Loading from "../../components/Loading.jsx";
+import PropTypes from "prop-types";
+import Loading from "./Loading.jsx";
 
-const Menu = () => {
-    const [menu, loading] = useMenu();
-    const items = menu.filter(item => item.category === 'popular');
-
+const ListItems = ({items, title, loading}) => {
     return (
-        <section className='mb-20'>
-            <SectionTitle heading={'FROM OUR MENU'} subheading={'---Check it out---'}/>
+        <section className='mb-12'>
             {
                 loading ? (
                     <Loading/>
@@ -18,7 +13,7 @@ const Menu = () => {
                         {
                             items.map(item => (
                                 <div key={item._id} className='flex gap-1'>
-                                    <img src={item.image}
+                                    <img src={item.image} alt={item.name}
                                          className='h-20 w-24 rounded-tr-[50%] rounded-br-[50%] rounded-bl-[50%] mr-6'/>
                                     <div>
                                         <h3 className='mb-2 font-medium uppercase'>{item.name} ------------------</h3>
@@ -34,12 +29,18 @@ const Menu = () => {
                 )
             }
             <div className='mt-12 text-center'>
-                <Link to='/menu' className='py-3 px-6 font-semibold uppercase border-b-2 border-gray-800 rounded-xl'>
-                    View Full Menu
+                <Link to={`/shop/${title}`} className='py-3 px-8 font-semibold uppercase border-b-2 border-gray-800 rounded-md'>
+                    ORDER YOUR FAVOURITE FOOD
                 </Link>
             </div>
         </section>
     );
 };
 
-export default Menu;
+ListItems.propTypes = {
+    items: PropTypes.array.isRequired,
+    title: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
+}
+
+export default ListItems;

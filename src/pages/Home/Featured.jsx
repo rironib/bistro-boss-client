@@ -1,6 +1,7 @@
-import SectionTitle from "./SectionTitle.jsx";
+
 import {Link} from "react-router-dom";
 import cover from '/public/assets/home/featured.jpg';
+import SectionTitle from "../../components/SectionTitle.jsx";
 
 const Featured = () => {
     return (
