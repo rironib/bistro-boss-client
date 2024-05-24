@@ -1,4 +1,3 @@
-// import React, { Component } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import slider1 from '/assets/home/01.jpg';
@@ -10,7 +9,7 @@ import slider6 from '/assets/home/06.png';
 
 const Slider = () => {
     return (
-        <Carousel showArrows={false} dynamicHeight={false} className='text-center'>
+        <Carousel showArrows={false} showStatus={false} dynamicHeight={false} className='text-center'>
             <div><img src={slider1}/></div>
             <div><img src={slider2}/></div>
             <div><img src={slider3}/></div>
