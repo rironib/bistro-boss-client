@@ -1,6 +1,17 @@
 import {Link, NavLink} from "react-router-dom";
+import {AuthContext} from "../provider/AuthProvider.jsx";
+import {useContext} from "react";
+import {toast} from "react-toastify";
 
 const Header = () => {
+    const {user, logOut} = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => toast.success("Logout successfully"))
+            .catch((err) => toast.error(err));
+    }
+
     const navMenu = <>
         <NavLink to='/'>Home</NavLink>
         <NavLink to='/contact'>Contact us</NavLink>
@@ -8,6 +19,46 @@ const Header = () => {
         <NavLink to='/menu'>Our Menu</NavLink>
         <NavLink to='/shop'>Our Shop</NavLink>
     </>
+
+    const userMenu = user ? (
+            <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            <img alt="Tailwind CSS Navbar component"
+                                 src={user.photoURL}/>
+                        </div>
+                    </div>
+                    <ul tabIndex={0}
+                        className="menu menu-sm dropdown-content mt-3 z-[1] gap-2 p-4 shadow bg-base-100 text-black rounded-box w-52">
+                        <li>{user.displayName}</li>
+                        <li><button onClick={handleLogout} className='btn btn-active'>Logout</button></li>
+                    </ul>
+                </div>
+        ) : (
+            <>
+                <Link to='/login'>Login</Link>
+                <Link to='/register'>Register</Link>
+            </>
+    )
+
+    // const userMenu = <>
+    //     <div className="dropdown dropdown-end">
+    //         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+    //             <div className="w-10 rounded-full">
+    //                 <img alt="Tailwind CSS Navbar component"
+    //                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
+    //             </div>
+    //         </div>
+    //         <ul tabIndex={0}
+    //             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 text-black rounded-box w-52">
+    //             <li><a>Settings</a></li>
+    //             <li><a>Logout</a></li>
+    //         </ul>
+    //     </div>
+    //     <Link to='/login'>Login</Link>
+    //     <Link to='/register'>Register</Link>
+    // </>
+
     return (
         <header className='w-full bg-slate-900 bg-opacity-50 text-white fixed z-20'>
             <div className="w-11/12 lg:w-10/12 max-w-[1275px] mx-auto py-2">
@@ -46,18 +97,8 @@ const Header = () => {
                                 <span className="badge badge-sm indicator-item">8</span>
                             </div>
                         </div>
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component"
-                                         src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
-                                </div>
-                            </div>
-                            <ul tabIndex={0}
-                                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
-                            </ul>
+                        <div className='hidden lg:flex gap-4 font-semibold font-inter uppercase'>
+                            {userMenu}
                         </div>
                     </div>
                 </div>
