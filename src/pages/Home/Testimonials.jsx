@@ -3,21 +3,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Autoplay, Navigation } from 'swiper/modules';
-import {useEffect, useState} from "react";
-import axios from "axios";
 import {Rating} from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css';
 import {FaQuoteLeft} from "react-icons/fa";
+import useReviews from "../../hooks/useReviews.jsx";
 
 const Testimonials = () => {
-    const [reviews, setReviews] = useState([]);
-    useEffect(() => {
-        axios.get('/reviews.json')
-            .then(res => {
-                const result = res.data;
-                setReviews(result)
-            })
-    }, []);
+    const [reviews] = useReviews();
 
     return (
         <section className='mb-20'>
