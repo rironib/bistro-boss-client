@@ -1,6 +1,6 @@
 
 import {Link} from "react-router-dom";
-import cover from '/public/assets/home/featured.jpg';
+import cover from '/assets/home/featured.jpg';
 import SectionTitle from "../../components/SectionTitle.jsx";
 
 const Featured = () => {
