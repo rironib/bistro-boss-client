@@ -9,6 +9,7 @@ import Contact from "../pages/Contact/Contact.jsx";
 import Menu from "../pages/Menu/Menu.jsx";
 import Shop from "../pages/Shop/Shop.jsx";
 import Dashboard from "../pages/Dashboard/Dashboard.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/dashboard',
-                        element: <Dashboard/>
+                        element: <PrivateRoute><Dashboard/></PrivateRoute>
                     }
                 ]
             },
