@@ -8,12 +8,20 @@ const Recommend = () => {
     const filteredItems  = menu.filter(item => item.category === 'offered');
     const items = filteredItems.slice(0,3);
 
+    if (loading) {
+        return <Loading/>
+    }
+
     return (
         <section className='mb-20'>
             <SectionTitle heading={'CHEF RECOMMENDS'} subheading={'---Should Try---'}/>
-            {loading ? <Loading/> : <FoodCard items={items} loading={loading}/>}
+            <div className='grid lg:grid-cols-3 gap-8'>
+                {
+                    items.map(item => <FoodCard key={item._id} item={item}/>)
+                }
+            </div>
         </section>
-    );
+);
 };
 
 export default Recommend;

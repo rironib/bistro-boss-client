@@ -7,9 +7,14 @@ import {Rating} from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css';
 import {FaQuoteLeft} from "react-icons/fa";
 import useReviews from "../../hooks/useReviews.jsx";
+import Loading from "../../components/Loading.jsx";
 
 const Testimonials = () => {
-    const [reviews] = useReviews();
+    const [reviews, loading] = useReviews();
+
+    if (loading) {
+        return <Loading />
+    }
 
     return (
         <section className='mb-20'>
