@@ -1,10 +1,11 @@
 import {Link, NavLink} from "react-router-dom";
-import {AuthContext} from "../provider/AuthProvider.jsx";
-import {useContext} from "react";
 import {toast} from "react-toastify";
+import useCart from "../hooks/useCart.jsx";
+import useAuth from "../hooks/useAuth.jsx";
 
 const Header = () => {
-    const {user, logOut} = useContext(AuthContext);
+    const {user, logOut} = useAuth();
+    const [cart] = useCart();
 
     const handleLogout = () => {
         logOut()
@@ -14,18 +15,17 @@ const Header = () => {
 
     const navMenu = <>
         <NavLink to='/'>Home</NavLink>
-        <NavLink to='/contact'>Contact us</NavLink>
         <NavLink to='/dashboard'>Dashboard</NavLink>
         <NavLink to='/menu'>Our Menu</NavLink>
         <NavLink to='/shop'>Our Shop</NavLink>
+        <NavLink to='/contact'>Contact us</NavLink>
     </>
 
     const userMenu = user ? (
             <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img alt="Tailwind CSS Navbar component"
-                                 src={user.photoURL}/>
+                            <img src={user.photoURL} alt={user.displayName} />
                         </div>
                     </div>
                     <ul tabIndex={0}
@@ -40,24 +40,6 @@ const Header = () => {
                 <Link to='/register'>Register</Link>
             </>
     )
-
-    // const userMenu = <>
-    //     <div className="dropdown dropdown-end">
-    //         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-    //             <div className="w-10 rounded-full">
-    //                 <img alt="Tailwind CSS Navbar component"
-    //                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
-    //             </div>
-    //         </div>
-    //         <ul tabIndex={0}
-    //             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 text-black rounded-box w-52">
-    //             <li><a>Settings</a></li>
-    //             <li><a>Logout</a></li>
-    //         </ul>
-    //     </div>
-    //     <Link to='/login'>Login</Link>
-    //     <Link to='/register'>Register</Link>
-    // </>
 
     return (
         <header className='w-full bg-slate-900 bg-opacity-50 text-white fixed z-20'>
@@ -94,7 +76,7 @@ const Header = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                           d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
-                                <span className="badge badge-sm indicator-item">8</span>
+                                <span className="badge badge-sm indicator-item">{cart.length}</span>
                             </div>
                         </div>
                         <div className='hidden lg:flex gap-4 font-semibold font-inter uppercase'>
