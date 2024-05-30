@@ -1,5 +1,4 @@
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {RiFacebookFill, RiGithubFill, RiGoogleFill} from "react-icons/ri";
 import bgImg from '/assets/others/authentication.png';
 import coverImg from '/assets/others/authentication2.png';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
@@ -7,6 +6,7 @@ import {useContext, useEffect} from "react";
 import {Helmet} from "react-helmet-async";
 import {AuthContext} from "../../provider/AuthProvider.jsx";
 import {toast} from "react-toastify";
+import SocialLogin from "../../components/SocialLogin/SocialLogin.jsx";
 
 const Login = () => {
     const {signIn} = useContext(AuthContext);
@@ -81,17 +81,7 @@ const Login = () => {
                             <div className='text-[#D1A054] mb-4'>New here? <Link to='/register' className='font-medium'>Create
                                 a New Account</Link></div>
                             <div className='mb-4'>Or sign in with</div>
-                            <div className='flex justify-center gap-6 text-xl text-gray-700'>
-                                <button className='p-1 border-gray-700 border-2 rounded-full'>
-                                    <RiFacebookFill/>
-                                </button>
-                                <button className='p-1 border-gray-700 border-2 rounded-full'>
-                                    <RiGoogleFill/>
-                                </button>
-                                <button className='p-1 border-gray-700 border-2 rounded-full'>
-                                    <RiGithubFill/>
-                                </button>
-                            </div>
+                            <SocialLogin/>
                         </div>
                     </div>
                 </div>
