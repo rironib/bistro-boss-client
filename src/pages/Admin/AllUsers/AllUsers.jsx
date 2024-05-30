@@ -2,6 +2,7 @@ import {useQuery} from "@tanstack/react-query";
 import {axiosSecure} from "../../../hooks/useAxiosSecure.jsx";
 import {RiDeleteBinFill, RiTeamFill} from "react-icons/ri";
 import Swal from "sweetalert2";
+import {toast} from "react-toastify";
 
 const ALlUsers = () => {
     const {data: users = [], refetch} = useQuery({
@@ -13,7 +14,13 @@ const ALlUsers = () => {
     })
 
     const handleUserRole = (user) => {
-        console.log(user);
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    toast.success("Successfully promoted!");
+                }
+            })
     }
 
     const handleDelete = (user) => {
@@ -25,9 +32,8 @@ const ALlUsers = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-
+        }).then((res) => {
+            if (res.isConfirmed) {
                 axiosSecure.delete(`/users/${user._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
@@ -74,10 +80,12 @@ const ALlUsers = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>
-                                        <button onClick={() => handleUserRole(user)}
-                                                className="btn bg-[#D1A054] text-white text-lg">
-                                            <RiTeamFill/>
-                                        </button>
+                                        {user.role === 'admin' ? 'Admin' : (
+                                            <button onClick={() => handleUserRole(user)}
+                                                    className="btn bg-[#D1A054] text-white text-lg">
+                                                <RiTeamFill/>
+                                            </button>
+                                        )}
                                     </td>
                                     <td>
                                         <button onClick={() => handleDelete(user)}
