@@ -16,6 +16,7 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory.jsx
 import Cart from "../pages/Dashboard/Cart/Cart.jsx";
 import Review from "../pages/Dashboard/Review/Review.jsx";
 import Booking from "../pages/Dashboard/Booking/Booking.jsx";
+import ALlUsers from "../pages/Admin/AllUsers/AllUsers.jsx";
 
 const router = createBrowserRouter([
     {
@@ -84,6 +85,28 @@ const router = createBrowserRouter([
                     {
                         path: '/dashboard/booking',
                         element: <Booking/>
+                    },
+
+                    // Admin Routes
+                    {
+                        path: '/dashboard/admin',
+                        element: <DBHome/>
+                    },
+                    {
+                        path: '/dashboard/add-items',
+                        element: <DBHome/>
+                    },
+                    {
+                        path: '/dashboard/manage-items',
+                        element: <DBHome/>
+                    },
+                    {
+                        path: '/dashboard/manage-bookings',
+                        element: <DBHome/>
+                    },
+                    {
+                        path: '/dashboard/all-users',
+                        element: <ALlUsers/>
                     },
                 ]
             }
