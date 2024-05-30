@@ -2,24 +2,41 @@ import {RiRestaurantFill} from "react-icons/ri";
 import {Helmet} from "react-helmet-async";
 import {useForm} from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic.jsx";
+import useAxiosSecure from "../../../hooks/useAxiosSecure.jsx";
+import {toast} from "react-toastify";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddItems = () => {
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data);
         const imageFile= {image: data.image[0]}
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         });
-        console.log(res.data.data.display_url);
+
+        if (res.data.success) {
+            const menuItem = {
+                name: data.name,
+                category: data.category,
+                price: parseFloat(data.price),
+                recipe: data.recipe,
+                image: res.data.data.display_url
+            }
+
+            const menuRes = await axiosSecure.post('/menu', menuItem);
+            if (menuRes.data.insertedId) {
+                reset();
+                toast.success(`${data.name} added successfully`);
+            }
+        }
     };
 
     return (
