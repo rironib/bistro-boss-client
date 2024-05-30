@@ -17,6 +17,7 @@ import Cart from "../pages/Dashboard/Cart/Cart.jsx";
 import Review from "../pages/Dashboard/Review/Review.jsx";
 import Booking from "../pages/Dashboard/Booking/Booking.jsx";
 import ALlUsers from "../pages/Admin/AllUsers/AllUsers.jsx";
+import AddItems from "../pages/Admin/AddItems/AddItems.jsx";
 
 const router = createBrowserRouter([
     {
@@ -94,7 +95,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/dashboard/add-items',
-                        element: <DBHome/>
+                        element: <AddItems/>
                     },
                     {
                         path: '/dashboard/manage-items',
