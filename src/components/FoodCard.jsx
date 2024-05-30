@@ -3,10 +3,11 @@ import {useLocation, useNavigate} from "react-router-dom";
 import useAuth from "../hooks/useAuth.jsx";
 import {toast} from "react-toastify";
 import Swal from "sweetalert2";
-import {axiosSecure} from "../hooks/useAxiosSecure.jsx";
+import useAxiosSecure from "../hooks/useAxiosSecure.jsx";
 import useCart from "../hooks/useCart.jsx";
 
 const FoodCard = ({item}) => {
+    const axiosSecure = useAxiosSecure();
     const {user} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();

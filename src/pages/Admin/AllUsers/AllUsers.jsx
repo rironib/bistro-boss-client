@@ -1,10 +1,12 @@
 import {useQuery} from "@tanstack/react-query";
-import {axiosSecure} from "../../../hooks/useAxiosSecure.jsx";
 import {RiDeleteBinFill, RiTeamFill} from "react-icons/ri";
 import Swal from "sweetalert2";
 import {toast} from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure.jsx";
 
 const ALlUsers = () => {
+    const axiosSecure = useAxiosSecure();
+
     const {data: users = [], refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -59,7 +61,7 @@ const ALlUsers = () => {
             </div>
             <div className='bg-white p-6'>
                 <div className='flex justify-between items-center mb-5 text-xl font-semibold uppercase'>
-                    <div>Total users: 9</div>
+                    <div>Total users: {users?.length}</div>
                 </div>
                 <div className="w-full overflow-x-auto rounded-xl">
                     <table className="table">
