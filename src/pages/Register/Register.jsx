@@ -6,28 +6,37 @@ import {useForm} from "react-hook-form";
 import {useContext} from "react";
 import {AuthContext} from "../../provider/AuthProvider.jsx";
 import {toast} from "react-toastify";
+import {axiosPublic} from "../../hooks/useAxiosPublic.jsx";
 
 const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const onSubmit = data => {
-        console.log(data);
-        createUser(data.email, data.password)
-            .then((res) => {
-                const loggedUser = res.user;
-                console.log(loggedUser);
-                updateUser (data.name, data.photoURL)
-                    .then(() => {
-                        console.log("User info updated");
-                        reset();
-                        toast.success("Registration successful!!");
-                        navigate('/');
-                    })
-            })
-            .catch(err => console.log(err));
-    }
+    const onSubmit = async (data) => {
+        try {
+            await createUser(data.email, data.password);
+            await updateUser(data.name, data.photoURL);
+
+            const userInfo = {
+                name: data.name,
+                email: data.email.toLowerCase(),
+                createAt: new Date().toISOString()
+            };
+
+            const res = await axiosPublic.post('/users', userInfo);
+            if (res.data._id) {
+                reset();
+                toast.success("Registration successful!!");
+                navigate('/');
+            } else {
+                toast.error(res.data.message);
+            }
+        } catch (err) {
+            toast.error(err.message);
+        }
+    };
+
 
     return (
         <>
