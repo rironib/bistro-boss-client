@@ -16,7 +16,7 @@ const Dashboard = () => {
     return (
         <>
             <div className='w-full min-h-screen flex'>
-                <div className='h-screen min-w-[280px] w-max bg-[#D1A054] sticky top-0'>
+                <div className='min-h-screen min-w-[280px] w-max bg-[#D1A054] sticky top-0'>
                     <div className='p-6 font-cinzel space-y-2'>
                         <h1 className='font-bold text-3xl'>BISTRO BOSS</h1>
                         <h5 className='font-semibold text-2xl'>Restaurant</h5>
