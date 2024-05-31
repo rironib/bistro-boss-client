@@ -18,6 +18,10 @@ import Review from "../pages/Dashboard/Review/Review.jsx";
 import Booking from "../pages/Dashboard/Booking/Booking.jsx";
 import ALlUsers from "../pages/Admin/AllUsers/AllUsers.jsx";
 import AddItems from "../pages/Admin/AddItems/AddItems.jsx";
+import AdminRoute from "./AdminRoute.jsx";
+import ManageItems from "../pages/Admin/ManageItems/ManageItems.jsx";
+import UpdateItem from "../pages/Admin/UpdateItem/UpdateItem.jsx";
+import Payment from "../pages/Private/Payment/Payment.jsx";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +72,10 @@ const router = createBrowserRouter([
                         element: <DBHome/>
                     },
                     {
+                        path: '/dashboard/payment',
+                        element: <Payment/>
+                    },
+                    {
                         path: '/dashboard/reservation',
                         element: <Reservation/>
                     },
@@ -91,24 +99,29 @@ const router = createBrowserRouter([
                     // Admin Routes
                     {
                         path: '/dashboard/admin',
-                        element: <DBHome/>
+                        element: <AdminRoute><DBHome/></AdminRoute>
                     },
                     {
                         path: '/dashboard/add-items',
-                        element: <AddItems/>
+                        element: <AdminRoute><AddItems/></AdminRoute>
                     },
                     {
                         path: '/dashboard/manage-items',
-                        element: <DBHome/>
+                        element: <AdminRoute><ManageItems/></AdminRoute>
                     },
                     {
                         path: '/dashboard/manage-bookings',
-                        element: <DBHome/>
+                        element: <AdminRoute><DBHome/></AdminRoute>
                     },
                     {
                         path: '/dashboard/all-users',
-                        element: <ALlUsers/>
+                        element: <AdminRoute><ALlUsers/></AdminRoute>
                     },
+                    {
+                        path: '/dashboard/update/:id',
+                        element: <AdminRoute><UpdateItem/></AdminRoute>,
+                        loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
+                    }
                 ]
             }
         ]
