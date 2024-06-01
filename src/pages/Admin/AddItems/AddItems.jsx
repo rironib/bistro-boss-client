@@ -77,7 +77,7 @@ const AddItems = () => {
                                     </label>
                                     <label className='grid gap-4'>
                                     <span className='font-semibold'>Price*</span>
-                                        <input type='number' placeholder='Price' {...register("price", {required: true})}
+                                        <input type='text' placeholder='Price' {...register("price", {required: true})}
                                                className='p-3 rounded-lg border outline-none'/>
                                     </label>
                                 </div>

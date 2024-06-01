@@ -47,9 +47,6 @@ const CheckoutForm = () => {
 
         if (error) {
             toast.error(error.message);
-            console.log('ERROR: ', error)
-        } else {
-            console.log('SUCCESS: ', paymentMethod);
         }
 
         // Confirm payment
@@ -64,9 +61,8 @@ const CheckoutForm = () => {
         })
 
         if (confirmError) {
-            console.log(confirmError)
+            toast.error(confirmError.message);
         } else {
-            console.log('Payment Intent', paymentIntent);
             if (paymentIntent.status === 'succeeded') {
                 const payment = {
                     email: user.email,

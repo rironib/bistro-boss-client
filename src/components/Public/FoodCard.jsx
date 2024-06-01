@@ -51,9 +51,9 @@ const FoodCard = ({item}) => {
     }
 
     return (
-        <div className='grid grid-rows-2 bg-[#F3F3F3]'>
-            <img src={image} alt={name} className='w-full'/>
-            <div className='grid justify-items-center items-center text-center px-10 py-8'>
+        <div className='h-max flex flex-col bg-[#F3F3F3]'>
+            <img src={image} alt={name} className='w-full h-64'/>
+            <div className='grid justify-items-center items-center gap-2 text-center px-10 py-8'>
                 <h3 className='font-semibold text-xl'>{name}</h3>
                 <p className='mb-4'>{recipe}</p>
                 <button onClick={() => handleAddToCart(_id)}

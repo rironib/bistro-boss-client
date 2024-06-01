@@ -20,7 +20,7 @@ const Dashboard = () => {
                     </div>
                     <div className='p-6 space-y-6 text-lg font-medium uppercase'>
                         <div className='grid gap-4 *:flex *:gap-2 *:items-center'>
-                            <Link to='/admin'><RiHome4Fill/> Admin Home</Link>
+                            <Link to='/admin'><RiHome4Fill/> Dashboard</Link>
                             <Link to='/admin/add-items'><RiRestaurantFill/> Add Items</Link>
                             <Link to='/admin/manage-items'><RiListCheck/> Manage Items</Link>
                             <Link to='/admin/manage-bookings'><RiBookFill/> Manage Bookings</Link>

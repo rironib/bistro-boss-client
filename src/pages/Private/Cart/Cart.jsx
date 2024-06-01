@@ -10,7 +10,7 @@ import SectionTitle from "../../../components/Shared/SectionTitle.jsx";
 const Cart = () => {
     const axiosSecure = useAxiosSecure();
     const [cart, refetch] = useCart();
-    const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
     const navigate = useNavigate();
 
     const handlePay = () => {

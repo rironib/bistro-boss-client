@@ -73,7 +73,7 @@ const ManageItems = () => {
                                         <td>{item.name}</td>
                                         <td>${item.price}</td>
                                         <td>
-                                            <Link to={`/dashboard/update/${item._id}`} className="btn bg-[#D1A054] text-white text-lg">
+                                            <Link to={`/admin/update/${item._id}`} className="btn bg-[#D1A054] text-white text-lg">
                                                 <RiEditBoxLine/>
                                             </Link>
                                         </td>

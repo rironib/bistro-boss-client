@@ -20,7 +20,7 @@ const PrivateLayout = () => {
                     </div>
                     <div className='p-6 space-y-6 text-lg font-medium uppercase'>
                         <div className='grid gap-4 *:flex *:gap-2 *:items-center'>
-                            <Link to='/dashboard'><RiHome3Fill/> User Home</Link>
+                            <Link to='/dashboard'><RiHome3Fill/> Dashboard</Link>
                             <Link to='/dashboard/reservation'><RiCalendar2Fill/> Reservation</Link>
                             <Link to='/dashboard/payment-history'><RiWallet3Fill/> Payment History</Link>
                             <Link to='/dashboard/cart'><RiShoppingCart2Fill/> My Cart</Link>

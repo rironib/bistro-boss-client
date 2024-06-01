@@ -11,7 +11,7 @@ import Contact from "../pages/Public/Contact/Contact.jsx";
 import Menu from "../pages/Public/Menu/Menu.jsx";
 import Shop from "../pages/Public/Shop/Shop.jsx";
 import PrivateLayout from "../layout/PrivateLayout.jsx";
-import DBHome from "../pages/Private/DBHome/DBHome.jsx";
+import PrivateHome from "../pages/Private/Home/PrivateHome.jsx";
 import Reservation from "../pages/Private/Reservation/Reservation.jsx";
 import PaymentHistory from "../pages/Private/PaymentHistory/PaymentHistory.jsx";
 import Cart from "../pages/Private/Cart/Cart.jsx";
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: '/dashboard',
-                        element: <DBHome/>
+                        element: <PrivateHome/>
                     },
                     {
                         path: '/dashboard/payment',
@@ -113,7 +113,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: '/admin/manage-bookings',
-                        element: <DBHome/>
+                        element: <PrivateHome/>
                     },
                     {
                         path: '/admin/all-users',
