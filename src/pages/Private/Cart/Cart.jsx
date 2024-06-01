@@ -1,33 +1,23 @@
-import {useQuery} from "@tanstack/react-query";
-import {RiDeleteBinFill, RiTeamFill} from "react-icons/ri";
+import useCart from "../../../hooks/useCart.jsx";
+import {RiDeleteBinFill} from "react-icons/ri";
 import Swal from "sweetalert2";
-import {toast} from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure.jsx";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 import {Helmet} from "react-helmet-async";
 import SectionTitle from "../../../components/Shared/SectionTitle.jsx";
 
-const ALlUsers = () => {
+const Cart = () => {
     const axiosSecure = useAxiosSecure();
+    const [cart, refetch] = useCart();
+    const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+    const navigate = useNavigate();
 
-    const {data: users = [], refetch} = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/users');
-            return res.data;
-        }
-    })
-
-    const handleUserRole = (user) => {
-        axiosSecure.patch(`/users/admin/${user._id}`)
-            .then(res => {
-                if (res.data.modifiedCount > 0) {
-                    refetch();
-                    toast.success("Successfully promoted!");
-                }
-            })
+    const handlePay = () => {
+        navigate('/dashboard/payment')
     }
 
-    const handleDelete = (user) => {
+    const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -36,15 +26,16 @@ const ALlUsers = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then((res) => {
-            if (res.isConfirmed) {
-                axiosSecure.delete(`/users/${user._id}`)
-                    .then(res => {
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/carts/${id}`)
+                    .then((res) => {
                         if (res.data.deletedCount > 0) {
                             refetch();
-                            toast.success('User has been deleted.')
+                            toast.success("Successfully removed!");
                         }
                     })
+                    .catch(err => toast.error(err.message));
             }
         });
     }
@@ -52,47 +43,48 @@ const ALlUsers = () => {
     return (
         <>
             <Helmet>
-                <title>All Users | Bistro Boss</title>
+                <title>Cart | Bistro Boss</title>
             </Helmet>
             <div className='w-full min-h-screen bg-[#F6F6F6] py-8 px-20'>
-                <SectionTitle heading={'MANAGE ALL USERS'} subheading={'---How many??---'}/>
+                <SectionTitle heading={'WANNA ADD MORE?'} subheading={'---My Cart---'}/>
 
                 <div className='bg-white p-6'>
                     <div className='flex justify-between items-center mb-5 text-xl font-semibold uppercase'>
-                        <div>Total users: {users?.length}</div>
+                        <div>Total Orders: {cart.length}</div>
+                        <div>Total Price: ${totalPrice}</div>
+                        <button onClick={handlePay} disabled={!cart.length > 0}
+                                className='btn bg-[#D1A054] text-white uppercase'>Pay
+                        </button>
                     </div>
                     <div className="w-full overflow-x-auto rounded-xl">
                         <table className="table">
                             <thead className='bg-[#D1A054] text-base text-white uppercase'>
                             <tr>
                                 <th>#</th>
-                                <th>NAME</th>
-                                <th>EMAIL</th>
-                                <th>ROLE</th>
+                                <th>ITEM IMAGE</th>
+                                <th>ITEM NAME</th>
+                                <th>PRICE</th>
                                 <th>ACTION</th>
                             </tr>
                             </thead>
                             <tbody>
                             {
-                                users.map((user, index) => (
+                                cart.map((item, index) => (
                                     <tr key={index}>
                                         <td>{index + 1}</td>
-                                        <td>{user.name}</td>
-                                        <td>{user.email}</td>
                                         <td>
-                                            {user.role === 'admin' ? 'Admin' : (
-                                                <button onClick={() => handleUserRole(user)}
-                                                        className="btn bg-[#D1A054] text-white text-lg">
-                                                    <RiTeamFill/>
-                                                </button>
-                                            )}
+                                            <div className="w-20 h-auto">
+                                                <img src={item.image} alt={item.name}/>
+                                            </div>
                                         </td>
-                                        <td>
-                                            <button onClick={() => handleDelete(user)}
+                                        <td>{item.name}</td>
+                                        <td>${item.price}</td>
+                                        <th>
+                                            <button onClick={() => handleDelete(item._id)}
                                                     className="btn bg-[#B91C1C] text-white text-lg">
                                                 <RiDeleteBinFill/>
                                             </button>
-                                        </td>
+                                        </th>
                                     </tr>
                                 ))
                             }
@@ -105,4 +97,4 @@ const ALlUsers = () => {
     );
 };
 
-export default ALlUsers;
+export default Cart;

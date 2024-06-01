@@ -91,8 +91,8 @@ const AddItems = () => {
                                 <div>
                                     <input type="file" {...register("image", {required: true})} className="file-input file-input-bordered w-full outline-none"/>
                                 </div>
-                                <div>
-                                    <button type='submit' className='flex items-center bg-gradient-to-r from-[#835D23] to-[#B58130] text-white px-6 py-2'>
+                                <div className='grid justify-center'>
+                                    <button type='submit' className='flex items-center gap-2 bg-gradient-to-r from-[#835D23] to-[#B58130] font-medium text-white px-6 py-2'>
                                         Add Item <RiRestaurantFill/>
                                     </button>
                                 </div>

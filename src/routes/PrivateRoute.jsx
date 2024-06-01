@@ -1,10 +1,12 @@
 import {Navigate, useLocation} from "react-router-dom";
 import PropTypes from "prop-types";
 import useAuth from "../hooks/useAuth.jsx";
+import useAdmin from "../hooks/useAdmin.jsx";
 
 const PrivateRoute = ({children}) => {
     const {user, loading} = useAuth();
     const location = useLocation();
+    const [isAdmin] = useAdmin();
 
     if (loading) {
         return (
@@ -14,8 +16,12 @@ const PrivateRoute = ({children}) => {
         );
     }
 
-    if (user) {
+    if (user && !isAdmin) {
         return children;
+    }
+
+    if (isAdmin) {
+        return <Navigate to='/admin' state={{from: location}} replace />
     }
 
     return <Navigate to="/login" state={{from: location}} replace />;

@@ -1,37 +1,39 @@
 import {createBrowserRouter} from "react-router-dom";
 import PrivateRoute from "./PrivateRoute.jsx";
+import AdminRoute from "./AdminRoute.jsx";
 import Root from "../layout/Root.jsx";
-import ErrorPage from "../pages/ErrorPage/ErrorPage.jsx";
-import Main from "../layout/Main.jsx";
-import Home from "../pages/Home/Home.jsx";
-import Login from "../pages/Login/Login.jsx";
-import Register from "../pages/Register/Register.jsx";
-import Contact from "../pages/Contact/Contact.jsx";
-import Menu from "../pages/Menu/Menu.jsx";
-import Shop from "../pages/Shop/Shop.jsx";
-import Dashboard from "../layout/Dashboard.jsx";
-import DBHome from "../pages/Dashboard/DBHome/DBHome.jsx";
-import Reservation from "../pages/Dashboard/Reservation/Reservation.jsx";
-import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory.jsx";
-import Cart from "../pages/Dashboard/Cart/Cart.jsx";
-import Review from "../pages/Dashboard/Review/Review.jsx";
-import Booking from "../pages/Dashboard/Booking/Booking.jsx";
+import Error from "../pages/Public/Error/Error.jsx";
+import PublicLayout from "../layout/PublicLayout.jsx";
+import Home from "../pages/Public/Home/Home.jsx";
+import Login from "../pages/Public/Auth/Login/Login.jsx";
+import Register from "../pages/Public/Auth/Register/Register.jsx";
+import Contact from "../pages/Public/Contact/Contact.jsx";
+import Menu from "../pages/Public/Menu/Menu.jsx";
+import Shop from "../pages/Public/Shop/Shop.jsx";
+import PrivateLayout from "../layout/PrivateLayout.jsx";
+import DBHome from "../pages/Private/DBHome/DBHome.jsx";
+import Reservation from "../pages/Private/Reservation/Reservation.jsx";
+import PaymentHistory from "../pages/Private/PaymentHistory/PaymentHistory.jsx";
+import Cart from "../pages/Private/Cart/Cart.jsx";
+import Review from "../pages/Private/Review/Review.jsx";
+import Booking from "../pages/Private/Booking/Booking.jsx";
 import ALlUsers from "../pages/Admin/AllUsers/AllUsers.jsx";
 import AddItems from "../pages/Admin/AddItems/AddItems.jsx";
-import AdminRoute from "./AdminRoute.jsx";
 import ManageItems from "../pages/Admin/ManageItems/ManageItems.jsx";
 import UpdateItem from "../pages/Admin/UpdateItem/UpdateItem.jsx";
 import Payment from "../pages/Private/Payment/Payment.jsx";
+import AdminLayout from "../layout/AdminLayout.jsx";
+import AdminHome from "../pages/Admin/AdminHome/AdminHome.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <Error/>,
         children: [
             {
                 path: '/',
-                element: <Main/>,
+                element: <PublicLayout/>,
                 children: [
                     {
                         path: '/',
@@ -55,17 +57,11 @@ const router = createBrowserRouter([
                     }
                 ]
             },
-            {
-                path: '/login',
-                element: <Login/>
-            },
-            {
-                path: '/register',
-                element: <Register/>
-            },
+
+            // Private Routes
             {
                 path: '/dashboard',
-                element: <PrivateRoute><Dashboard/></PrivateRoute>,
+                element: <PrivateRoute><PrivateLayout/></PrivateRoute>,
                 children: [
                     {
                         path: '/dashboard',
@@ -95,35 +91,49 @@ const router = createBrowserRouter([
                         path: '/dashboard/booking',
                         element: <Booking/>
                     },
+                ]
+            },
 
-                    // Admin Routes
+            // Admin Routes
+            {
+                path: '/admin',
+                element: <AdminRoute><AdminLayout/></AdminRoute>,
+                children: [
                     {
-                        path: '/dashboard/admin',
-                        element: <AdminRoute><DBHome/></AdminRoute>
+                        path: '/admin',
+                        element: <AdminHome/>
                     },
                     {
-                        path: '/dashboard/add-items',
-                        element: <AdminRoute><AddItems/></AdminRoute>
+                        path: '/admin/add-items',
+                        element: <AddItems/>
                     },
                     {
-                        path: '/dashboard/manage-items',
-                        element: <AdminRoute><ManageItems/></AdminRoute>
+                        path: '/admin/manage-items',
+                        element: <ManageItems/>
                     },
                     {
-                        path: '/dashboard/manage-bookings',
-                        element: <AdminRoute><DBHome/></AdminRoute>
+                        path: '/admin/manage-bookings',
+                        element: <DBHome/>
                     },
                     {
-                        path: '/dashboard/all-users',
-                        element: <AdminRoute><ALlUsers/></AdminRoute>
+                        path: '/admin/all-users',
+                        element: <ALlUsers/>
                     },
                     {
-                        path: '/dashboard/update/:id',
-                        element: <AdminRoute><UpdateItem/></AdminRoute>,
+                        path: '/admin/update/:id',
+                        element: <UpdateItem/>,
                         loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
                     }
                 ]
-            }
+            },
+            {
+                path: '/login',
+                element: <Login/>
+            },
+            {
+                path: '/register',
+                element: <Register/>
+            },
         ]
     },
 ]);

@@ -71,7 +71,7 @@ const AuthProvider = ({children}) => {
                 setLoading(false);
             });
         return () => unsubscribe();
-    }, []);
+    }, [axiosPublic]);
 
     const value = {user, loading, createUser, updateUser, signIn, signInWithGoogle, signInWithGithub, logOut}
 

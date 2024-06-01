@@ -1,5 +1,5 @@
 import {Helmet} from "react-helmet-async";
-import SectionTitle from "../../../components/SectionTitle.jsx";
+import SectionTitle from "../../../components/Shared/SectionTitle.jsx";
 import {Elements} from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm.jsx";
