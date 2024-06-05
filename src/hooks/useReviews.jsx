@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/reviews')
+        axios.get('https://bistro-boss-bd.vercel.app/reviews')
             .then(res => {
                 setReviews(res.data);
                 setLoading(false);

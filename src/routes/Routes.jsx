@@ -1,29 +1,29 @@
-import {createBrowserRouter} from "react-router-dom";
-import PrivateRoute from "./PrivateRoute.jsx";
-import AdminRoute from "./AdminRoute.jsx";
-import Root from "../layout/Root.jsx";
-import Error from "../pages/Public/Error/Error.jsx";
+import { createBrowserRouter } from "react-router-dom";
+import AdminLayout from "../layout/AdminLayout.jsx";
+import PrivateLayout from "../layout/PrivateLayout.jsx";
 import PublicLayout from "../layout/PublicLayout.jsx";
-import Home from "../pages/Public/Home/Home.jsx";
+import Root from "../layout/Root.jsx";
+import AddItems from "../pages/Admin/AddItems/AddItems.jsx";
+import AdminHome from "../pages/Admin/AdminHome/AdminHome.jsx";
+import ALlUsers from "../pages/Admin/AllUsers/AllUsers.jsx";
+import ManageItems from "../pages/Admin/ManageItems/ManageItems.jsx";
+import UpdateItem from "../pages/Admin/UpdateItem/UpdateItem.jsx";
+import Booking from "../pages/Private/Booking/Booking.jsx";
+import Cart from "../pages/Private/Cart/Cart.jsx";
+import PrivateHome from "../pages/Private/Home/PrivateHome.jsx";
+import Payment from "../pages/Private/Payment/Payment.jsx";
+import PaymentHistory from "../pages/Private/PaymentHistory/PaymentHistory.jsx";
+import Reservation from "../pages/Private/Reservation/Reservation.jsx";
+import Review from "../pages/Private/Review/Review.jsx";
 import Login from "../pages/Public/Auth/Login/Login.jsx";
 import Register from "../pages/Public/Auth/Register/Register.jsx";
 import Contact from "../pages/Public/Contact/Contact.jsx";
+import Error from "../pages/Public/Error/Error.jsx";
+import Home from "../pages/Public/Home/Home.jsx";
 import Menu from "../pages/Public/Menu/Menu.jsx";
 import Shop from "../pages/Public/Shop/Shop.jsx";
-import PrivateLayout from "../layout/PrivateLayout.jsx";
-import PrivateHome from "../pages/Private/Home/PrivateHome.jsx";
-import Reservation from "../pages/Private/Reservation/Reservation.jsx";
-import PaymentHistory from "../pages/Private/PaymentHistory/PaymentHistory.jsx";
-import Cart from "../pages/Private/Cart/Cart.jsx";
-import Review from "../pages/Private/Review/Review.jsx";
-import Booking from "../pages/Private/Booking/Booking.jsx";
-import ALlUsers from "../pages/Admin/AllUsers/AllUsers.jsx";
-import AddItems from "../pages/Admin/AddItems/AddItems.jsx";
-import ManageItems from "../pages/Admin/ManageItems/ManageItems.jsx";
-import UpdateItem from "../pages/Admin/UpdateItem/UpdateItem.jsx";
-import Payment from "../pages/Private/Payment/Payment.jsx";
-import AdminLayout from "../layout/AdminLayout.jsx";
-import AdminHome from "../pages/Admin/AdminHome/AdminHome.jsx";
+import AdminRoute from "./AdminRoute.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 
 const router = createBrowserRouter([
     {
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
                     {
                         path: '/admin/update/:id',
                         element: <UpdateItem/>,
-                        loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
+                        loader: ({params}) => fetch(`https://bistro-boss-bd.vercel.app/menu/${params.id}`)
                     }
                 ]
             },
